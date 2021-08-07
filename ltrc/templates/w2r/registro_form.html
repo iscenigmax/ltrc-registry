@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+{% crispy form %}
+
+{% block titulo %}WINTER PROJECT - registro{% endblock %}
+
+{% block contenido %}
+    <form role="form" method="post" autocomplete="off">
+        {% csrf_token %}
+        <h2>WINTER PROJECT</h2>
+        <table class="table-form">
+            {{ form.as_table  }}
+        </table>
+         <p class="text-center"><a target="_blank" href="{% url 'terminos' %}">aviso términos, condiciones y privacidad</a></p>
+        <button type="submit" class="btn btn-success btn-block">Aceptar</button>
+    </form>
+{% endblock %}

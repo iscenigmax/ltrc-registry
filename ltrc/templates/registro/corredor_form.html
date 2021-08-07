@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block titulo %}ICONS - THE END V - registro{% endblock %}
+
+{% block contenido %}
+    <form class="form-horizontal" role="form" method="post">
+        {% csrf_token %}
+        <h2>Registro</h2>
+        <table class="table-form">
+            {{ form.as_table }}
+        </table>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <p class="text-center"><a target="_blank" href="{% url 'terminos' %}">aviso términos, condiciones y privacidad</a></p>
+        <button type="submit" class="btn btn-success btn-block">Aceptar</button>
+    </form>
+{% endblock %}

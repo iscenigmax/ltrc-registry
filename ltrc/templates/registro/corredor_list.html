@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tags %}
+{% block titulo %}Listado de corredores confirmados{% endblock %}
+{% block estilos %}
+    <style>
+        .container {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}
+{% block contenido %}
+
+    <form method="get" action="{% url 'reistro_corredor_list' %}">
+        <p>
+{#            <span class="glyphicon glyphicon-search"> Guia TALAMAS:</span>#}
+            <span class="glyphicon glyphicon-search"> Nombre:</span>
+            <input type="text" name="filter"/>
+            <input type="submit" name="submit" value="Buscar"/>
+        </p>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">FOLIO</th>
+{#                <th scope="col">GUIA</th>#}
+                <th scope="col">NOMBRE</th>
+{#                <th scope="col">TALLA</th>#}
+                <th scope="col">CLUB</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td scope="row">{{ object.folio }}</td>
+{#                    <td scope="row">{{ object.guia }}</td>#}
+                    <td scope="row">{{ object.nombre|upper }} {{ object.apellido_paterno|upper }} {{ object.apellido_materno|upper }}</td>
+{#                    <td>{{ object.talla }}</td>#}
+                    <td scope="row">{{ object.club }}</td>
+                    <td scope="row">{{ object.fecha_nacimiento }}</td>
+                </tr>
+                {% empty %}
+                <div class="alert alert-danger" role="alert">
+                    GUIA NO ENCONTRADO...
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

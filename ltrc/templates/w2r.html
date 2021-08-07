@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block titulo %}W2R{% endblock %}
+
+{% block contenido %}
+    <form class="form-horizontal" role="form">
+        {% if id %}
+            <h3>Registro efectuado con éxito bienvenido al W2R de invierno…</h3>
+            <br>
+            <br>
+        {% endif %}
+        <a class="btn btn-primary btn-block" href="{% url 'w2r_registro_create' %}">REGISTRO</a>
+        <a class="btn btn-primary btn-block" href="mailto:ing.casr@gmail.com?subject=SOPORTE WINTER PROJECT">SOPORTE</a>
+    </form>
+{% endblock %}
+
+
+
+

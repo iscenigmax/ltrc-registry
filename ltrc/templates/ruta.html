@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block titulo %}Ruta{% endblock %}
+
+{% block estilos %}
+    <style>
+        .container {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}
+
+{% block contenido %}
+
+    <form class="form-horizontal" role="form" method="get" autocomplete="off">
+
+        <h2>Cita 2019/12/31 7am</h2>
+        <ul>
+            <li> SALIDA - Monumento a Los Fundadores</li>
+            <li> Avenida Guerrero (Sur)</li>
+            <li> Lateral Reforma (Sur en sentido contrario)</li>
+            <li> Paseo Colón (Oriente)</li>
+            <li> Avenida Ocampo (Norte) punto de hidratación 🍹🍺</li>
+            <li> Reynosa (Sur en sentido contrario, últimos 200mts)</li>
+            <li> Calle Héroe de Nacataz (Poniente)</li>
+            <li>META - Monumento a Los Fundadores 🏆🏁</li>
+        </ul>
+
+        <img src="/static/img/ruta.jpg" class="img-fluid" alt="ruta"/>
+{#        <img src="/static/img/altimetria01.png" class="img-thumbnail" alt="altimetria"/>#}
+{#        <img src="/static/img/altimetria02.png" class="img-thumbnail" alt="altimetria"/>#}
+    </form>
+
+{% endblock %}
