@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import psycopg2
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +19,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-only-insecure-key-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,21 +80,34 @@ WSGI_APPLICATION = 'ltrc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': 5432,
-        'CONN_MAX_AGE': 600,
-        'OPTIONS': {
-            'connect_timeout': 5,
-            'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE
-         }
-    },
-}
+DB_NAME = os.environ.get('DB_NAME', '').strip()
+DB_USER = os.environ.get('DB_USER', '').strip()
+DB_PASSWORD = os.environ.get('DB_PASSWORD', '').strip()
+DB_HOST = os.environ.get('DB_HOST', '').strip()
+DB_PORT = os.environ.get('DB_PORT', '5432').strip()
+
+if DB_NAME and DB_USER and DB_HOST:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': DB_NAME,
+            'USER': DB_USER,
+            'PASSWORD': DB_PASSWORD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+            'CONN_MAX_AGE': 600,
+            'OPTIONS': {
+                'connect_timeout': 5,
+            },
+        },
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        },
+    }
 
 
 # Password validation
